@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/shower-ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+    </style>
+</head>
+<body class="shower list">
+
+<header class="caption">
+    <h1>Speeding up your website using Resource Hints</h1>
+</header>
+
+<section class="slide" id="cover">
+    <h2>Speeding up your website using Resource Hints</h2>
+</section>
+
+<section class="slide">
+    <h2>3 самых больших страха этого поколения</h2>
+    <img class="cover" src="pictures/todays_fears.jpg" alt="3 самых больших страха этого поколения">
+</section>
+
+<section class="slide">
+    <h2>Узкое горлышко в вебе?</h2>
+    <img class="cover" src="pictures/loader.png" alt="3 самых больших страха этого поколения">
+</section>
+
+<section class="slide" id="common-site">
+    <h2>Обычный новостной сайт</h2>
+    <img src="pictures/common-site.png" alt="3 самых больших страха этого поколения">
+    <style>
+
+        #common-site img {
+            max-width: 550px;
+        }
+    </style>
+</section>
+
+<section class="slide">
+    <h2>Как доставить ресурсы к пользователю быстро?</h2>
+    <ol>
+        <li>конкотенация js, css</li>
+        <li>минификация изображений, html, css, js</li>
+        <li>кеширование</li>
+        <li>gzipping, CDN и т.д.</li>
+    </ol>
+</section>
+
+<section class="slide" id="dns-records">
+    <h2>Пререзолв доменов при запуске браузера</h2>
+    <div class="columns two">
+        <figure>
+            <img src="pictures/DNS records.png" alt="DNS records">
+            <figcaption class="copyright right white">
+                <a href="https://docs.google.com/presentation/d/18zlAdKAxnc51y_kj-6sWLmnjl6TLnaru_WH0LJTjP-o/present?slide=id.g120f70e9a_02">©
+                    Ilya Grigorik</a>
+            </figcaption>
+        </figure>
+        <p>Chrome. ТОП-10 популярных доменных имен клиента</p>
+    </div>
+
+    <style>
+        #dns-records img {
+            max-width: 300px;
+        }
+    </style>
+</section>
+
+
+<section class="slide">
+    <h2>Resource Hints</h2>
+    <p>Еще одна из техник оптимизации фронтенда.</p>
+    <p>Мы можем дать подсказку браузеру, к чему ему уже нужно готовиться.</p>
+</section>
+
+<section class="slide">
+    <img class="cover" src="pictures/resource-hints.jpg" alt="resource-hints">
+</section>
+
+<section class="slide">
+    <h2>DNS Prefetch</h2>
+    <pre>
+            <code>&lt;link <mark>rel="dns-prefetch"</mark> href="//example.com"&gt;</code>
+        </pre>
+    <blockquote>
+        <p>to indicate an
+            <mark>origin that will be used</mark>
+            to fetch required resources, and that the user agent
+            <mark>SHOULD resolve as early as possible</mark>.
+        </p>
+    </blockquote>
+</section>
+
+<section class="slide">
+    <h2>Когда полезно?</h2>
+    <ol>
+        <li>редиректы</li>
+        <li>критические ресурсы для следующего шага (лендинг + чекаут страница)</li>
+        <li>third-party, аналитика, Facebook, Twitter соц. кнопки</li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2>Preconnect</h2>
+    <pre>
+            <code>&lt;link <mark>rel="preconnect"</mark> href="//example.com"&gt;</code>
+            <code>&lt;link <mark>rel="preconnect"</mark> href="//cdn.example.com" crossorigin&gt;</code>
+        </pre>
+    <blockquote>
+        <p>to indicate an
+            <mark>origin that will be used</mark> to fetch required resources.
+            Initiating an
+            <mark>early connection</mark>, which includes the
+            <mark>DNS lookup, TCP handshake</mark>, and optional
+            <mark>TLS negotiation</mark>, allows the user agent to mask the high latency costs of establishing a connection</p>
+    </blockquote>
+</section>
+
+<section class="slide">
+    <h2>Когда полезно?</h2>
+    <ol>
+        <li>https</li>
+        <li>редиректы</li>
+        <li>критические ресурсы для следующего шага (лендинг + чекаут страница)</li>
+        <li>third-party, аналитика, Facebook, Twitter соц. кнопки</li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2>Prefetch</h2>
+    <pre>
+            <code>&lt;link <mark>rel="prefetch"</mark> href="checkout.html"&gt;</code>
+            <code>&lt;link <mark>rel="prefetch"</mark> href="other-styles.css"&gt;</code>
+        </pre>
+    <p>to identify a
+        <mark>resource that might be required by the next navigation</mark>, and that the user agent
+        <mark>SHOULD fetch</mark>, such that the user agent can deliver a faster response once the resource is requested in the future.</p>
+</section>
+
+<section class="slide">
+    <h2>Когда полезно?</h2>
+    <ol>
+        <li>критические ресурсы css/js/fonts</li>
+        <li>изображения, видео</li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2>Prerender</h2>
+    <pre>
+            <code>&lt;link <mark>rel="prerender"</mark> href="//example.com/next-page.html"&gt;</code>
+        </pre>
+    <p>to identify a
+        <mark>resource that might be required by the next navigation</mark>, and that the user agent
+        <mark>SHOULD fetch and
+            EXECUTE
+        </mark>, such that the user agent can deliver a faster response once the resource is requested in the
+        future.</p>
+</section>
+
+<section class="slide">
+    <h2>Когда полезно?</h2>
+    <ol>
+        <li>AMP-like pages</li>
+        <li>'тяжелая' анимация</li>
+        <li>лендинг -> чекаут</li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2>Спасибо!</h2>
+</section>
+
+
+<footer class="badge">
+    <a href="https://github.com/shower/shower">Fork me on GitHub</a>
+</footer>
+
+<div class="progress"></div>
+
+<script src="node_modules/shower-core/shower.min.js"></script>
+<!-- Copyright © 2018 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
